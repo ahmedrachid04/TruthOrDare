@@ -12,30 +12,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <style>
         body {
-    background-color: #fff0f5; /* Light pink background for a softer feel */
+    background-color: #fff0f5; /* Soft pink background */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background 0.5s ease-in-out;
 }
 
 .container, .game, .result-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
 }
 
+/* Initially hidden */
 .inactive {
     opacity: 0;
     transform: scale(0.9);
     pointer-events: none;
 }
 
-/* Centering adjustments */
-.container, .game, .result-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-/* Title Styling */
+/* Title */
 h1 {
     font-family: "Emblema One", system-ui;
     font-style: normal;
@@ -75,7 +79,7 @@ input:focus {
     box-shadow: 0px 0px 8px rgba(178, 34, 34, 0.5);
 }
 
-/* Start Button */
+/* Buttons */
 button {
     border-radius: 20px;
     border: none;
@@ -96,13 +100,8 @@ button:hover {
 }
 
 /* Game Section */
-.game {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
-}
-
-.game:not(.inactive) {
+.game:not(.inactive),
+.result-container:not(.inactive) {
     opacity: 1;
     transform: scale(1);
 }
@@ -164,18 +163,6 @@ button:hover {
 }
 
 /* Result Section */
-.result-container {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
-    text-align: center;
-}
-
-.result-container:not(.inactive) {
-    opacity: 1;
-    transform: scale(1);
-}
-
 .result {
     font-family: "Roboto Mono", monospace;
     font-size: 1.5rem;
@@ -199,6 +186,7 @@ button:hover {
     background-color: palevioletred;
     color: white;
 }
+
     </style>
 </head>
 <body>
