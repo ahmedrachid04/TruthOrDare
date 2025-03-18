@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TRUTH OR DARE BITCH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Emblema+One&display=swap" rel="stylesheet">
@@ -66,6 +66,7 @@ h1 {
 input {
     font-family: "Roboto Mono", monospace;
     padding: 10px;
+    margin-bottom: 10px;
     border: 2px solid palevioletred;
     border-radius: 8px;
     text-align: center;
@@ -84,6 +85,7 @@ button {
     border-radius: 20px;
     border: none;
     background-color: pink;
+    margin-top: 20px;
     width: 120px;
     height: 45px;
     font-family: "Emblema One", system-ui;
@@ -231,58 +233,60 @@ button:hover {
     let nextPlayer
     let usedTruths=[]
     let usedDares=[]
-    const dares = [
+    let secondPlayer=" "
+    let dares = [
     "🔮 Speak in an accent.",
     "🎭 Act like a monkey until it's your turn again.",
     "🎤 Sing the chorus of your favorite song out loud.",
     "🚀 Do your best impression of Harry Potter.",
-    "👀 Let the person next to you read your last text message out loud.",
+    "👀 Let secondPlayer read your last WhatsApp message out loud.",
     "🍋 Bite into a lemon like it's an apple.",
     "👻 Let the other players pick a randon contact and call it and then hang up when they answer.",
-    "🎬 Recreate a famous movie scene.",
+    "🎬 Recreate a famous movie scene with secondPlayer",
     "💃 Do a 30-second dance.",
+    "Tickle secondPlayer",
     "📸 Take a funny selfie and post it on your story.",
+    "📸 Take a funny selfie of secondPlayer and post it on your story.",
     "🥄 Try to balance a pen on your nose for 10 seconds.",
     "🕺 Do a TikTok dance challenge.",
     "👅 Try to lick your elbow.",
     "👀 Stare deeply into someone’s eyes for 30 seconds without laughing.",
+    "Let secondPlayer slap you",
     " bark like a dog every time someone talks for the next 5 rounds.",
     "🐱 Meow after every sentence you say for the next 5 rounds.",
-    "🤳 Send a funny selfie to a contact your friends pick.",
+    "🤳 Send a funny selfie to a contact secondPlayer pick.",
     "📢 Yell out the first word that comes to your mind.",
     "💪 Flex for 30 seconds.",
     "🐸 Talk in a weird voice for the next 5 rounds.",
     "🏃‍♂️ Run outside and yell ‘I love life!’",
     "👃 Try to touch your nose with your tongue.",
-    "👑 Let the group decide a new name for you for the rest of the game."
+    "👑 Let secondPlayer decide a new name for you for the rest of the game."
 ];
 
-const truthQuestions = [
+let truthQuestions = [
     "😈 Have you ever had a crush on someone in this room?",
     "💋 What's the most scandalous thing you've ever done?",
-    "🕵️ Have you ever stalked someone on social media? Who?",
+    "🕵️ Have you ever stalked someone on social media and Who?",
     "🔥 What's your biggest celebrity crush?",
+    "👀 Have you ever talked shit about someone in this group and Who?",
     "🙈 What's the most embarrassing thing that's ever happened to you?",
     "💌 What's the riskiest text you sent?",
     "🛏️ What's your dream job?",
     "🍑 Have you ever had a crush on a friend's partner?",
-    "📲 Show the last five people you DMed.",
+    "🍑 Have you ever had a crush on a friend?",
     "👀 Have you ever walked in on someone doing something they shouldn't be?",
-    "👄 If you had to kiss one person in this room, who would it be?",
-    "📵 What's something you've deleted from your phone because it was too embarrassing?",
     "🤫 What's a secret you've never told anyone?",
     "💀 What's the worst lie you've ever told?",
-    "🍷 Have you ever been drunk and totally regretted what you did?",
-    "😏 Have you ever had a one-night stand? Details?",
+    "🍷 Have you ever gotten drunk?",
+    "😏 Have you ever had a one-night stand?",
     "🎥 What’s the most *questionable* thing you've watched online?",
-    "🎤 What's something you've said in the heat of the moment and regretted?",
+    "🎤 What's something you've said/done in the heat of the moment and regretted?",
     "🥵 What’s the most awkward date you've ever been on?",
-    "💃 Have you ever flirted with someone way older than you?",
+    "💀 What gives you the ick from your partner",
+    "💃 Have you ever flirted with someone way older than you and Who?",
     "💰 Would you ever date someone just for their money?",
-    "📖 Tell us about your most embarrassing diary entry or note.",
-    "🚫 What’s something you’re glad your parents never found out about?",
     "💄 Have you ever faked feelings for someone?",
-    "🚿 Do you pee in the shower? Be honest.",
+    "🚿 Do you pee in the shower?",
     "📸 Have you ever sent a risky pic to the wrong person?",
     "👀 What's the weirdest thing you've done when you were alone?",
     "🎭 Have you ever faked being sick to get out of something? What was it?",
@@ -290,28 +294,18 @@ const truthQuestions = [
     "🤔 Have you ever been rejected? How did it happen?",
     "🤥 Have you ever been caught in a lie? What happened?",
     "🧐 What’s your opinion on open relationships?",
-    "💔 Have you ever broken someone's heart?",
-    "🤝 Have you ever made a deal with someone that you later regretted?",
-    "😳 What’s the weirdest thing you've Googled at 3 AM?",
+    "😳 What’s the weirdest thing you asked ChatGPT?",
     "🕵️‍♂️ Have you ever catfished or made a fake profile online?",
     "💋 Have you ever practiced kissing on a mirror or your hand?",
     "🛑 What’s a secret fetish you’ve never told anyone?",
-    "📲 Let the person next to you look through your last five searches on your phone.",
     "🎭 Have you ever pretended to like something just to impress someone?",
-    "💍 Would you ever date/marry for money?",
     "😏 If you could have a one-night stand with anyone in the world, who would it be?",
-    "🥴 What’s the most embarrassing thing you've done while drunk?",
     "🔄 Have you ever had a ‘friends with benefits’ situation?",
-    "👀 What's the weirdest place you've hooked up with someone?",
     "🙃 Have you ever ghosted someone? Why?",
-    "🛌 Have you ever woken up next to someone and regretted it?",
-    "🍑 Have you ever booty-called someone?",
-    "💦 What’s the sexiest dream you’ve ever had?",
+    "💦 Share a controversial opinion about secondPlayer",
     "🥵 Have you ever kissed in a public place?",
     "👂 What’s the most NSFW thing you've overheard?",
     "😈 Have you ever flirted with someone just to get something you wanted?",
-    "📞 If you had to call your last ex right now, what would you say?",
-    "👀 What’s the kinkiest thing you’ve ever done?",
     "🤯 Have you ever had a crush on a teacher, boss, or someone in authority?",
     "🚨 Have you ever almost gotten caught doing something naughty?",
     "💳 Have you ever spent money on something you knew was a dumb idea?",
@@ -323,7 +317,7 @@ const truthQuestions = [
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Swap
+        [array[i], array[j]] = [array[j], array[i]];
     }
 }
 
@@ -360,6 +354,8 @@ function shuffleArray(array) {
     truth.addEventListener("click", function () {
         resultContainer.classList.remove("inactive")
         game.classList.add("inactive")
+        secondPlayer=players[Math.floor(Math.random() * players.length)]
+        while(secondPlayer===lastPlayer){secondPlayer=players[Math.floor(Math.random() * players.length)]}
         if (truthQuestions.length === 0) {
             truthQuestions=usedTruths.slice()
             shuffleArray(truthQuestions)
@@ -369,13 +365,15 @@ function shuffleArray(array) {
     const randomIndex = Math.floor(Math.random() * truthQuestions.length);
     const chosenTruth = truthQuestions.splice(randomIndex, 1)[0]; 
     usedTruths.push(chosenTruth)
-    result.innerHTML = chosenTruth;
+    result.innerHTML = chosenTruth.replace("secondPlayer", secondPlayer);
     })
 
 
     dare.addEventListener("click", function() {
         resultContainer.classList.remove("inactive")
         game.classList.add("inactive")
+        secondPlayer=players[Math.floor(Math.random() * players.length)]
+        while(secondPlayer===lastPlayer){secondPlayer=players[Math.floor(Math.random() * players.length)]}
         if (dares.length === 0) {
             dares=usedDares.slice()
             shuffleArray(dares)
@@ -385,8 +383,8 @@ function shuffleArray(array) {
     const randomIndex = Math.floor(Math.random() * dares.length);
     const chosenDare = dares.splice(randomIndex, 1)[0]; 
     usedDares.push(chosenDare)
-    result.innerHTML = chosenDare;
-    })
+    result.innerHTML = chosenDare.replace("secondPlayer", secondPlayer);
+})
     
     
 </script>
